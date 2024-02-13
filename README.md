@@ -107,8 +107,9 @@ SSH into your device or access the terminal using F4. We're assuming you already
 
 #### 3. Test the script:
 
-    python3 ~/scripts/nintendo_retropie/overlay.py &
-
+    sudo python3 /home/pi/scripts/nintendo_retropie/overlay.py &
+    sudo apt-get remove --purge pulseaudio
+    
 You should now see overlay icons
 
 ### 4. Set up script autostart
