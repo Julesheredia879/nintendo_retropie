@@ -43,6 +43,31 @@ Under-Voltage, Freq-capped due to high temperature, battery critical, shutdown i
 
 ![In-game](_images/ingame.png)  
 In-game
+### -1. install display configuration
+
+    over_voltage=6
+    arm_freq=1750
+    gpu_freq=700
+    
+    hdmi_force_edid_audio=1
+    max_usb_current=1
+    hdmi_force_hotplug=1
+    config_hdmi_boost=7
+    hdmi_group=2
+    hdmi_mode=87
+    hdmi_drive=2
+    display_rotate=0                             
+    hdmi_timings=1024 1 50 18 50 600 1 15 3 15 0 0 0 60 0 40000000 3  
+    dtoverlay=gpio-shutdown
+    
+    enable_uart=1
+    #dtoverlay=disable-bt
+    dtoverlay=miniuart-bt
+
+
+
+
+
 ### 0. Install nintendo switch 
 
     
