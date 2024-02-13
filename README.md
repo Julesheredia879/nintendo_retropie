@@ -131,7 +131,7 @@ You can use this one-liner instead if you prefer:
     sudo service bluetooth status
 
 
-Connection issues (input lag & ghost inputs) (especially if you connect more than one BT controller)
+### Connection issues (input lag & ghost inputs) (especially if you connect more than one BT controller)
 Try reducing distance from your controller to Raspberry (helps sometimes)
 Try to disable internal WiFi - this helps to extent signal strength, you can use this script to disable/enable Wifi on the fly (several users report PS3 controller connections problems are vanished since)
 Try forcing a lower baud rate in /usr/bin/btuart, on line 22: $HCIATTACH /dev/serial1 bcm43xx xxxxxx noflow - $BDADDR. Smaller values of 115200 and 230400 have been known to alleviate input lag / ghost input on a Pi 3B.
