@@ -44,37 +44,29 @@ Under-Voltage, Freq-capped due to high temperature, battery critical, shutdown i
 ![In-game](_images/ingame.png)  
 In-game
 ### 0. Install nintendo switch 
-    https://retropie.org.uk/docs/Nintendo-Switch-Controllers/
+
     
     git clone https://github.com/nicman23/dkms-hid-nintendo
     cd dkms-hid-nintendo
     sudo dkms add .
     sudo dkms build nintendo -v 3.2
     sudo dkms install nintendo -v 3.2
-    
     sudo apt-get install libevdev-dev
-    
     git clone https://github.com/DanielOgorchock/joycond.git
     cd joycond
     cmake .
     sudo make install
     sudo systemctl enable --now joycond
-
-    
-    https://retropie.org.uk/docs/PS3-Controller/?h=bluetooth#persisting-bluetooth-ps3controller-only
-    
+### 0.1 Install things with bluetooth     
     sudo apt install bluetooth blueman bluez-hcidump checkinstall libusb-dev libbluetooth-dev joystick pkg-config
-
-    
-    https://projects.raspberrypi.org/en/projects/nix-python-reading-serial-data
     sudo apt install pi-bluetooth
         
 
 
-https://retropie.org.uk/docs/Nintendo-Switch-Controllers/
-https://retropie.org.uk/docs/PS3-Controller/?h=bluetooth#persisting-bluetooth-ps3controller-only
-https://retropie.org.uk/docs/Bluetooth-Controller/?h=blu
-https://github.com/Julesheredia879/nintendo_retropie.git
+https://retropie.org.uk/docs/Nintendo-Switch-Controllers/ ,
+https://retropie.org.uk/docs/PS3-Controller/?h=bluetooth#persisting-bluetooth-ps3controller-only ,
+https://retropie.org.uk/docs/Bluetooth-Controller/?h=blu ,
+https://github.com/Julesheredia879/nintendo_retropie.git and 
 https://projects.raspberrypi.org/en/projects/nix-python-reading-serial-data
 
 
