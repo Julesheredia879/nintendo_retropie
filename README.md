@@ -69,6 +69,21 @@ https://retropie.org.uk/docs/Bluetooth-Controller/?h=blu ,
 https://github.com/Julesheredia879/nintendo_retropie.git and 
 https://projects.raspberrypi.org/en/projects/nix-python-reading-serial-data
 
+### 0.2 UPS instalation
+    configuracion de cables 
+![In-game](_images/configuracion cables.jpg)  
+cables
+
+### 0.3 
+    sudo nano /etc/rc.local
+    
+    #Add the following to the line above the exit at the bottom of the page
+    
+    sudo python3 /home/pi/UPSPACK_V3/shutdown_check.py &
+
+
+![In-game](_images/instalar.png)  
+cables
 
 
 ## Installation Instructions
