@@ -71,7 +71,7 @@ https://projects.raspberrypi.org/en/projects/nix-python-reading-serial-data
 
 ### 0.2 UPS instalation
     configuracion de cables 
-![In-game](_images/configuracion cables.jpg)  
+![In-game](_images/configuracion_cables.jpg)  
 cables
 
 ### 0.3 
