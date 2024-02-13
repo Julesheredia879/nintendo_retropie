@@ -126,3 +126,6 @@ You can use this one-liner instead if you prefer:
     (crontab -l ; echo "@reboot python3 /home/pi/scripts/gbz_overlay/overlay.py") | crontab -
 
 ### 5. Reboot
+
+sudo apt-get install --no-install-recommends bluetooth
+sudo service bluetooth status
