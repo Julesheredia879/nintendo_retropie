@@ -31,7 +31,7 @@ import RPi.GPIO as GPIO
 pngview_path="/usr/local/bin/pngview"
 pngview_call=[pngview_path, "-d", "0", "-b", "0x0000", "-n", "-l", "15000", "-y", "0", "-x"]
 
-iconpath= "/home/pi/scripts/gbz_overlay/overlay_icons/"
+iconpath= "/home/pi/scripts/nintendo_retropie/overlay_icons/"
 iconpath2 = os.path.dirname(os.path.realpath(__file__)) + "/overlay_icons/"
 logfile = os.path.dirname(os.path.realpath(__file__)) + "/overlay.log"
 dpi=36
