@@ -70,11 +70,11 @@ https://github.com/Julesheredia879/nintendo_retropie.git and
 https://projects.raspberrypi.org/en/projects/nix-python-reading-serial-data
 
 ### 0.2 UPS instalation
-    configuracion de cables 
+
 ![In-game](_images/configuracion_cables.jpg)  
 cables
 
-### 0.3 
+### 0.3 software https://github.com/rcdrones/UPSPACK_V3.git
     sudo nano /etc/rc.local
     
     #Add the following to the line above the exit at the bottom of the page
