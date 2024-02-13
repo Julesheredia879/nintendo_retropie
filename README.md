@@ -56,19 +56,15 @@ SSH into your device or access the terminal using F4. We're assuming you already
     make -j4
     sudo cp pngview/pngview /usr/local/bin/
 
-### 2. Download Material Design Icons by Google
-    cd ~/src
-    git clone --depth 1 https://github.com/google/material-design-icons.git material-design-icons-master
 
-### 3. Download the script and install dependencies:
+### 2. Download the script and install dependencies:
     mkdir ~/scripts && cd ~/scripts
-    git clone --depth 1 https://github.com/d-rez/gbz_overlay.git
-    ln -s ~/scripts/gbz_overlay/overlay_icons/ic_battery_alert_red_white_36dp.png ~/src/material-design-icons-master/device/drawable-mdpi/ic_battery_alert_red_white_36dp.png
+    git clone --depth 1 https://github.com/Julesheredia879/nintendo_retropie.git
     sudo apt-get update
     sudo apt-get install build-essential python3-dev python3-smbus python3-pip
-    sudo pip3 install adafruit-ads1x15
+    sudo pip3 install pyserial
 
-#### Test the script:
+#### 3. Test the script:
 
     python3 ~/scripts/gbz_overlay/overlay.py &
 
