@@ -65,10 +65,10 @@ fbfile="tvservice -s"
 
 vmax = {"discharging": 100,
         "charging"   : 4.5 }
-vmin = {"discharging": 8,
+vmin = {"discharging": 3,
         "charging"   : 4.25 }
-icons = { "discharging": [ "alert_red", "alert", "20", "30", "30", "50", "60",
-                           "60", "80", "90", "full", "full" ],
+icons = { "discharging": [ "alert_red", "alert", "30", "40", "50", "60",
+                           "70", "80", "full" ],
           "charging"   : [ "charging_20", "charging_20", "charging_20",
                            "charging_30", "charging_30", "charging_50",
                            "charging_60", "charging_60", "charging_80",
@@ -209,9 +209,8 @@ def battery(por_centaje):
     level_icon="unknown"
 
 
-  if value_v <= 5:
+  if value_v <= 2:
     my_logger.warn("Battery voltage at or below 5%. Initiating shutdown within 1 minute")
-
     subprocess.Popen(pngview_call + [str(int(resolution[0]) / 2 - 64), "-y", str(int(resolution[1]) / 2 - 64), icon_battery_critical_shutdown])
     os.system("sleep 60 && sudo poweroff &")
 
@@ -247,8 +246,8 @@ def lectura(serial_port):
         except serial.SerialException as e:
             #print("-")
             reconectar_serial(serial_port)
-            return None  # Puedes manejar la reconexión aquí o devolver un valor específico
-
+            #return None  # Puedes manejar la reconexión aquí o devolver un valor específico
+            accumulated_data = ''
 
 def reconectar_serial(serial_port):
     while True:
@@ -258,23 +257,17 @@ def reconectar_serial(serial_port):
             #print("Reconnected to serial port.")
             break
         except serial.SerialException as e:
-            #print("Error reconnecting to serial port")
-            time.sleep(1)  # Espera 1 segundo antes de intentar la reconexión nuevamente
+            print(".")
 
 
 def verificar_estructura(data):
     pattern = re.compile(r'\$ SmartUPS (.*?),Vin (.*?),BATCAP (.*?),Vout (.*?) \$')
-
     matches = pattern.findall(data)
-
     if len(matches) == 1:
         version, vin, batcap, vout = matches[0]
         return True, version, vin, batcap, vout
     else:
         return False, None, None, None, None
-
-
-
 class UPS2_IO:
     def __init__(self,bcm_io=18):
         self.shutdown_check_pin = bcm_io
@@ -289,7 +282,13 @@ class UPS2_IO:
             print(i,end = ' ',flush=True)
             time.sleep(1)
 
+        my_logger.warn("Battery voltage at or below 2%. Initiating shutdown within 1 minute")
+        subprocess.Popen(pngview_call + [str(int(resolution[0]) / 2 - 64), "-y", str(int(resolution[1]) / 2 - 64), icon_battery_critical_shutdown])
+        os.system("sleep 60 && sudo poweroff &")
+
         print("\nexecute System shudown!\n")
+        
+        print("llegaron las puetas")
         os.system("sudo shutdown -t now")
         sys.exit()
 
@@ -299,8 +298,13 @@ class UPS2_IO:
         GPIO.cleanup()
 
 
-
-
+def seriarespuesta(ser):
+    while True:
+        dato =lectura(ser)
+        if dato !=None:
+            return dato
+        #else:
+        #    reconectar_serial(ser)
 
 
 overlay_processes = {}
@@ -330,44 +334,58 @@ ser = serial.Serial("/dev/ttyAMA0", baudrate=9600)
 dato=""
 anterior="$ SmartUPS V3.2P,Vin NG,BATCAP 100,Vout 5178 $"
 control=UPS2_IO()
-batcap=100
-
-
+batcap=2
+numero_de_errores=0
+#dato=lectura(ser)
 
 while True:
   #(battery_level, value_v) = battery()
   try:
-      dato =lectura(ser)
-      if dato ==None:
+      #dato =lectura(ser)
+      #dato=seriarespuest(ser)
+      """if dato ==None:
           dato=anterior
-      #print(dato)
-      es_valido, version, vin, batcap, vout = verificar_estructura(dato)
-      if es_valido:
-          #print("Estructura válida:")
-          #print(f"Versión: {version}")
-          #print(f"Vin: {vin}")
-          print(f"BATCAP: {batcap}")
-          #print(f"Vout: {vout}")
-          #print(" ")
-          anterior=dato
+          numero_de_errores=numero_de_errores+1 
+          print(" error lee el anterior: ",numero_de_errores )
+          #while(True):
+          #numero_de_errores=numero_de_errores+1
+          #reconectar_serial(ser)
       else:
-          #print("Estructura no válida")
-          print(" ")
-  except Exception as error:
-      print(" ")
+          numero_de_errores=0
 
-  #print("voltaje inyectado a el sistema: ", batcap)
+      if numero_de_errores==1:
+          dato=seriarespuesta(ser)
+          numero_de_errores=0
+          print("se solicito otra vez")"""     
+      while True:
+          dato =lectura(ser)
+          es_valido, version, vin, batcap, vout = verificar_estructura(dato)
+          if es_valido:
+              break
+      #anterior=dato
+      """else:
+          print("Estructura no válida")
+          print(" ")
+          es_valido, version, vin, batcap, vout = verificar_estructura(anterior)"""
+ 
+
+  except Exception as error:
+      print("super error fatal")
+      os.system("sudo reboot")
+      #dato=anterior
+
+  print("voltaje inyectado a el sistema: ", batcap)
   (battery_level, value_v) = battery(int(batcap))
   wifi_state = wifi()
   bt_state = bluetooth()
   env = environment()
-  my_logger.info("%s,median: %.2f, %s,icon: %s,wifi: %s,bt: %s, throttle: %#0x" % (
-    datetime.now(),
+  """ my_logger.info("Bateria: %.2f, Array: %s, Icon: %s, WiFi: %s, Bt: %s" % (
+    #datetime.now(),
     value_v,
     list(battery_history),
     battery_level,
     wifi_state.name,
     bt_state.name,
-    env
-  ))
-  time.sleep(10)
+    #env
+  ))"""
+  time.sleep(60)
