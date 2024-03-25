@@ -46,8 +46,10 @@ In-game
 ### -1. install display configuration
 
     over_voltage=6
-    arm_freq=1750
-    gpu_freq=700
+    arm_freq=2000
+    gpu_freq=750
+
+    force_turbo=1
     
     hdmi_force_edid_audio=1
     max_usb_current=1
