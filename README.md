@@ -165,3 +165,6 @@ Try forcing a lower baud rate in /usr/bin/btuart, on line 22: $HCIATTACH /dev/se
 Buy a new BT adapter and put it to your Raspberry. Add dtoverlay=pi3-disable-bt in /boot/config.txt to disable internal BT module (ultima ratio, speeds up communication, extents range and speed depending on your BT adapter model)
 
     sudo nano /usr/bin/btuart
+
+### 6. Temperature
+    vcgencmd measure_temp
