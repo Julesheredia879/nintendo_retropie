@@ -168,3 +168,5 @@ Buy a new BT adapter and put it to your Raspberry. Add dtoverlay=pi3-disable-bt 
 
 ### 6. Temperature
     vcgencmd measure_temp
+### 7 scp 
+    scp pi@192.168.3.XX:/home/pi/scripts/nintendo_retropie/supertest.py C:\Users\HP\Documents\switch_segunda_generation
